@@ -30,14 +30,14 @@ export class SignupComponent implements OnInit {
   createForm() {
     this.registerForm = this.fb.group({
       email: ['', Validators.required ],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      username: ['', Validators.required]
     });
   }
 
   tryRegister(value) {
     this.authService.doRegister(value)
       .then(res => {
-        console.log(res);
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';
       }, err => {

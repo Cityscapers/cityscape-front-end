@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FirebaseUserModel} from '../shared/models/user.model';
 import { Location } from '@angular/common';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ import { Location } from '@angular/common';
 export class ProfileComponent implements OnInit {
 
   user: FirebaseUserModel;
+  userID: any;
   profileForm: FormGroup;
 
   constructor(
@@ -24,14 +26,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
-    this.route.data.subscribe(routeData => {
-      const data = routeData.data;
-      if (data) {
-        this.user = data;
-        this.createForm(this.user.name);
-      }
-    });
-    console.log(this.user);
+    //
+    // let user = this.userService.getCurrentUser().then( (res) => {
+    //   console.log(res);
+    // });
+    this.userID = firebase.auth().currentUser;
+    console.log(this.userID.uid);
   }
 
   createForm(name) {

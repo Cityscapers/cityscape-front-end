@@ -11,7 +11,6 @@ export class UserInformationService implements CanActivate {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public db: AngularFirestore,
     private router: Router
   ) { }
 
@@ -32,6 +31,7 @@ export class UserInformationService implements CanActivate {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(res => {
           resolve(res);
+          this.setUserInfo(value, res);
         }, err => reject(err));
     });
   }
@@ -70,7 +70,7 @@ export class UserInformationService implements CanActivate {
 
   getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      let user = firebase.auth().onAuthStateChanged((user) => {
+      firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           resolve(user);
         } else {
@@ -79,6 +79,7 @@ export class UserInformationService implements CanActivate {
       });
     });
   }
+
 
   updateCurrentUser(value){
     return new Promise<any>((resolve, reject) => {
@@ -91,4 +92,14 @@ export class UserInformationService implements CanActivate {
       }, err => reject(err))
     });
   }
+
+  setUserInfo(formInfo: any, user: any) {
+     const db = firebase.database();
+     db.ref('users/' + user.user.uid).set({
+       username: formInfo.username,
+       email: formInfo.email
+     });
+    console.log(formInfo.email, formInfo.username)
+    console.log(user.user.uid);
+   }
 }
