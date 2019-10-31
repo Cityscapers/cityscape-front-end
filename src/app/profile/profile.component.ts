@@ -26,12 +26,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
-    //
-    // let user = this.userService.getCurrentUser().then( (res) => {
-    //   console.log(res);
-    // });
-    this.userID = firebase.auth().currentUser;
-    console.log(this.userID.uid);
+    this.userID = firebase.auth().currentUser.uid; // pulls user ID which will use to find the user info in database.
   }
 
   createForm(name) {
