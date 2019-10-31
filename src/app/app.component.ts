@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {UserInformationService} from './shared/services/user.information.service';
 import * as firebase from 'firebase';
 
 @Component({
