@@ -36,6 +36,5 @@ export class CitiesComponent implements OnInit {
 
   convertTemp(temp: number) {
     this.cityTemp = ((temp - 273.15) * (9 / 5) + 32);
-    Math.round(this.cityTemp);
   }
 }

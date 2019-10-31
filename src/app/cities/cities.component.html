@@ -1,4 +1,5 @@
+
 <p>cities works!</p>
 <input placeholder = "enter a city" [(ngModel)]="cityName" (change)="getData()">
-<p> Current Temperature {{ cityTemp | number:'1.0-0' }} F</p>
-<p> Current Weather {{ data.weather[0].description}} </p>
+<p> Current Temperature: {{ cityTemp | number:'1.0-0' }} F</p>
+<p> Current Weather: {{ data.weather[0].description}} </p>

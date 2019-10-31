@@ -7,15 +7,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  API_Key:string  = '69df5635b8d9b9b6c1ddf9ee1ec2f1a2' ;
-  url:string = 'http://battuta.medunes.net/api/city/jp/search/?city=paris&callback=parseResponse&key=69df5635b8d9b9b6c1ddf9ee1ec2f1a2';
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get(this.url).subscribe(data => {
-      console.log("data: " + data);
-    });
   }
 
 }
