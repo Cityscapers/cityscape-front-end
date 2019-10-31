@@ -36,13 +36,13 @@
           <div class="sm-building col-1"></div>
           <div class="md-building col-1"></div>
           <div class="sm-building col-1">
-            <nav class="navlink">
+            <nav *ngIf="!isUserLoggedIn" class="navlink">
               <a routerLink="/signup">SIGNUP</a>
             </nav>
           </div>
           <div class="building col-1"></div>
           <div class="sm-building col-1">
-            <nav class="navlink">
+            <nav *ngIf="!isUserLoggedIn" class="navlink">
               <a routerLink="/login">LOGIN</a>
             </nav>
           </div>
