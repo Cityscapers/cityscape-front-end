@@ -17,6 +17,8 @@ export class CitiesComponent implements OnInit {
   url = 'http://api.openweathermap.org/data/2.5/weather?q=';
   cityName: string;
   cityTemp: number;
+  cityWeather: string;
+  weatherImg: string;
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
@@ -31,10 +33,20 @@ export class CitiesComponent implements OnInit {
      this.httpClient.get(this.url + this.cityName + '&appid=' + this.apiKey).subscribe((data: any)  => {
       this.data = data;
       this.convertTemp(data.main.temp);
+      this.getWeather(data);
+      this.getWeatherImg(data);
       });
   }
 
   convertTemp(temp: number) {
     this.cityTemp = ((temp - 273.15) * (9 / 5) + 32);
+  }
+
+  getWeather(data: any) {
+    this.cityWeather = data.weather[0].description;
+  }
+
+  getWeatherImg(dat: any) {
+    this.weatherImg = 'http://openweathermap.org/img/wn/' + this.data.weather[0].icon + '@2x.png';
   }
 }
