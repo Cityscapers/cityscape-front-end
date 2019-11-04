@@ -7,9 +7,14 @@
 			<div class= "title col-6">
 				<h1 class="name">CITYSCAPE</h1>
 				<h1 >Where you get your weather.</h1>
-				<nav *ngIf="!isUserLoggedIn" class="signup">
-              		<a routerLink="/signup">sign up</a>
-            	</nav>
+				<span *ngIf="!isUserLoggedIn" class="row">
+					<nav>
+	              		<a class = "signup" routerLink="/signup">sign up</a>
+	            	</nav>
+	            	<nav>
+	              		<a class = "login" routerLink="/login">log in</a>
+	            	</nav>
+            	</span>
 			</div>
 			<div *ngIf="isUserLoggedIn">
 				<h1>search for cities</h1>
