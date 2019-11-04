@@ -1,1 +1,19 @@
-<p>home works!</p>
+<html>
+	<head>
+	</head>
+	<body class="container">
+		<div class="row">
+			<img class="image col-6" src="../assets/homeicon.svg" />
+			<div class= "title col-6">
+				<h1 class="name">CITYSCAPE</h1>
+				<h1 >Where you get your weather.</h1>
+				<nav *ngIf="!isUserLoggedIn" class="signup">
+              		<a routerLink="/signup">sign up</a>
+            	</nav>
+			</div>
+			<div *ngIf="isUserLoggedIn">
+				<h1>search for cities</h1>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+.image {
+	height: 40em;
+}
+
+.title {
+	margin: auto;
+	width: 50%;
+}
+
+.name {
+	font-size: 60px;
+}
+
+a {
+	color:white;
+}
+a:visted {
+	color: white;
+}
+a:hover {
+	text-decoration:  none;
+}
+
+.signup {
+	text-decoration: none;
+	text-align: center;
+	color: black;
+	background-color: #428af5;
+	width: 100px;
+	border-radius: 20px;
+	padding: 5px;
+}
