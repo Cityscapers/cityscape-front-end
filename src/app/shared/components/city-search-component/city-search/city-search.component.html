@@ -1,11 +1,16 @@
-<input
-  (keyup)="searchForCity($event)"
-  >
-
-<ul *ngIf="results">
-  <li *ngFor="let result of results | slice:0:9">
-    <a href="cities/{{ result.city }}" target="_blank">
-      {{ result.city }}, {{ result.state}}
-    </a>
-  </li>
-</ul>
+<html class="container searchbox">
+	<span class="search">
+		<input class="box" (keyup)="searchForCity($event)" placeholder="search for a city">
+		<span *ngIf="results">
+		  <p *ngFor="let result of results | slice:0:9">
+		  	<span class=" item">
+		    	<a class="result" href="cities/{{ result.city }}" target="_blank">
+		      	{{ result.city }}, {{ result.state}}
+		    	</a>
+		    	<!-- add to dashboard button -->
+		  		<span class="plus">+</span>
+	  		</span>
+		  </p>
+		  </span>
+	</span>
+</html>
