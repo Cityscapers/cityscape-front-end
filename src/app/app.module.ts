@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms';
+import { CitySearchComponent } from './shared/components/city-search-component/city-search/city-search.component';
 
 
 
@@ -26,7 +27,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     ProfileComponent,
     SignupComponent,
     LoginComponent,
-    CitiesComponent
+    CitiesComponent,
+    CitySearchComponent
   ],
   imports: [
     BrowserModule,

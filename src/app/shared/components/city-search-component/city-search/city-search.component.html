@@ -1,0 +1,11 @@
+<input
+  (keyup)="searchForCity($event)"
+  >
+
+<ul *ngIf="results">
+  <li *ngFor="let result of results | slice:0:9">
+    <a href="cities/{{ result.city }}" target="_blank">
+      {{ result.city }}, {{ result.state}}
+    </a>
+  </li>
+</ul>
