@@ -99,7 +99,5 @@ export class UserInformationService implements CanActivate {
        username: formInfo.username,
        email: formInfo.email
      });
-    console.log(formInfo.email, formInfo.username)
-    console.log(user.user.uid);
    }
 }

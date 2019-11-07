@@ -20,29 +20,34 @@ export class ProfileComponent implements OnInit {
   constructor(
     public userService: UserInformationService,
     private route: ActivatedRoute,
-    private location: Location,
-    private fb: FormBuilder
-  ) { }
+    private location: Location) { }
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
-    this.userID = firebase.auth().currentUser.uid; // pulls user ID which will use to find the user info in database.
+    this.setUserInfo();
   }
 
-  createForm(name) {
-    this.profileForm = this.fb.group({
-      name: [name, Validators.required ]
-    });
+
+  setUserInfo() {
+    if (this.isUserLoggedIn) {
+      this.userID = firebase.auth().currentUser.uid;
+      const db = firebase.database();
+      db.ref('/users/' + this.userID).once('value').then((snapshot) => {
+        this.user = snapshot.val();
+      });
+    } else {
+      this.user = null;
+    }
   }
 
-  save(value){
+  save(value) {
     this.userService.updateCurrentUser(value)
       .then(res => {
         console.log(res);
       }, err => console.log(err));
   }
 
-  logout(){
+  logout() {
     this.userService.doLogout()
       .then((res) => {
         this.location.back();
@@ -50,5 +55,7 @@ export class ProfileComponent implements OnInit {
         console.log('Logout error', error);
       });
   }
-
+  get isUserLoggedIn() {
+    return firebase.auth().currentUser ? true : false;
+  }
 }
