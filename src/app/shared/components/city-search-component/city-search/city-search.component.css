@@ -22,16 +22,12 @@
 	border-radius: 100px;
 	color: #428af5;
 	text-align: center;
+	margin-bottom: 10px;
 }
 
 .plus {
-	color: white;
-	background-color: #428af5;
-	border-radius: 100px;
-	padding-right: 5px;
-	padding-left: 5px;
-	line-height: 5px;
-	vertical-align: middle;
+	width: 10px;
+	height: 10px;
 }
 
 .result {

@@ -1,5 +1,41 @@
 
-<p>cities works!</p>
-<input placeholder = "enter a city" [(ngModel)]="cityName" (change)="getData()">
-<p> Current Temperature: {{ cityTemp | number:'1.0-0' }} F</p>
-<p> Current Weather: {{ data.weather[0].description}} </p>
+<h1 style="text-align:center">{{cityName}}</h1>
+<div class="ui-g">
+    <div class="ui-g-4">
+        <p-card class="ui-card-title" header="Today's Weather" styleClass="ui-card-shadow">
+            <p style="text-align:center"><img src={{icon[0]}}/></p>
+            <p style="text-align:center"> {{ forecastMin[0] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[0] | number:'1.0-0' }}{{degrees}}</p>
+            <p style="text-align:center"> {{ description[0] }} </p>
+        </p-card>
+    </div>
+    <div class="ui-g-2">
+        <p-card class="ui-card-title" header={{date[1]|date:short}} styleClass="ui-card-shadow">
+            <p style="text-align:center"><img src={{icon[1]}}/></p>
+            <p style="text-align:center"> {{ forecastMin[1] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[1] | number:'1.0-0' }}{{degrees}}</p>
+            <p style="text-align:center"> {{ description[1] }} </p>
+        </p-card> 
+    </div>
+    <div class="ui-g-2"> 
+        <p-card class="ui-card-title" header={{date[2]|date:short}} styleClass="ui-card-shadow">
+            <p style="text-align:center"><img src={{icon[2]}}/></p>
+            <p style="text-align:center"> {{ forecastMin[2] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[2] | number:'1.0-0' }}{{degrees}}</p>
+            <p style="text-align:center"> {{ description[2] }} </p>
+        </p-card> 
+    </div>
+    <div class="ui-g-2">
+        <p-card class="ui-card-title" header={{date[3]|date:short}} styleClass="ui-card-shadow">
+            <p style="text-align:center"><img src={{icon[3]}}/></p>
+            <p style="text-align:center"> {{ forecastMin[3] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[3] | number:'1.0-0' }}{{degrees}}</p>
+            <p style="text-align:center"> {{ description[3] }} </p>
+        </p-card> 
+    </div>
+    <div class="ui-g-2">
+        <p-card class="ui-card-title" header={{date[4]|date:short}} styleClass="ui-card-shadow">
+            <p style="text-align:center"><img src={{icon[4]}}/></p>
+            <p style="text-align:center"> {{ forecastMin[4] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[4] | number:'1.0-0' }}{{degrees}}</p>
+            <p style="text-align:center"> {{ description[4] }} </p>
+        </p-card> 
+    </div>
+</div>
+
+
