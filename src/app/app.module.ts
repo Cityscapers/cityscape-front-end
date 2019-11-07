@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CardModule} from 'primeng/card';
+import { CitySearchComponent } from './shared/components/city-search-component/city-search/city-search.component';
 
 
 
@@ -27,7 +28,8 @@ import {CardModule} from 'primeng/card';
     ProfileComponent,
     SignupComponent,
     LoginComponent,
-    CitiesComponent
+    CitiesComponent,
+    CitySearchComponent
   ],
   imports: [
     BrowserModule,

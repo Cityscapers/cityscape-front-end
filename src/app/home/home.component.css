@@ -1,0 +1,48 @@
+.image {
+	height: 40em;
+}
+
+.title {
+	margin: auto;
+	width: 50%;
+}
+
+.name {
+	font-size: 60px;
+}
+
+a {
+	color:white;
+}
+a:visted {
+	color: white;
+}
+a:hover {
+	text-decoration:  none;
+	color: white;
+}
+
+.signup {
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	background-color: #428af5;
+	width: 100px;
+	border-radius: 20px;
+	padding: 5px 10px 5px 10px;
+	margin: 10px;
+}
+.login {
+	text-decoration: none;
+	text-align: center;
+	color: #428af5;
+	width: 100px;
+	border-radius: 20px;
+	padding: 5px 10px 5px 10px;
+	border: 1px #428af5 solid;
+	border-color: #428af5;
+	margin: 10px;
+}
+.login:hover {
+	color: #428af5;
+}

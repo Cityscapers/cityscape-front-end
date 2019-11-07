@@ -61,7 +61,8 @@
           <div class="sm-building col-1"></div>
           <div class="building col-1">
             <nav class="navlink">
-              <a routerLink="/profile">PROFILE</a>
+              <a *ngIf="!isUserLoggedIn" routerLink="/profile">PROFILE</a>
+              <a *ngIf="isUserLoggedIn" routerLink ="/profile"> {{currentUsername}} </a>
             </nav>
           </div>
         </div>
