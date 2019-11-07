@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {CanActivate, Router} from '@angular/router';
+import {FirebaseUserCitiesModel} from '../models/user-cities.model';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +81,20 @@ export class UserInformationService implements CanActivate {
     });
   }
 
+  getCurrentUserCityList() {
+    return new Promise<any>((resolve, reject) =>
+    {
+      const interestedCities: FirebaseUserCitiesModel[] = [];
+      const db = firebase.database();
+      db.ref('/users/' + firebase.auth().currentUser.uid + '/cities').once('value').then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
+        });
+      });
+      resolve(interestedCities);
+    });
+  }
+
 
   updateCurrentUser(value){
     return new Promise<any>((resolve, reject) => {
@@ -99,5 +114,13 @@ export class UserInformationService implements CanActivate {
        username: formInfo.username,
        email: formInfo.email
      });
+   }
+
+   addCityToUserInDatabase(cityInfo: any, userID: string) {
+    const db = firebase.database();
+    db.ref('users/' + userID + '/cities').push({
+      city: cityInfo.city,
+      state: cityInfo.state
+    });
    }
 }
