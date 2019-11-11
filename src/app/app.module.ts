@@ -16,7 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CardModule} from 'primeng/card';
+//import {CardModule} from 'primeng/card';
 import { CitySearchComponent } from './shared/components/city-search-component/city-search/city-search.component';
 
 
@@ -41,7 +41,7 @@ import { CitySearchComponent } from './shared/components/city-search-component/c
     AngularFireAuthModule,
     ReactiveFormsModule,
     // imports firebase/auth, only needed for auth features
-    CardModule
+    //sCardModule
 
   ],
   providers: [],

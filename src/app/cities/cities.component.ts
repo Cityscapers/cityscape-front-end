@@ -15,7 +15,7 @@ export class CitiesComponent implements OnInit {
   forecastMin: number[] = [];
   forecastMax: number[] = [];
   description: number[] = [];
-  icon: number[] = [];
+  icon: string[] = [];
   date: string[] = [];
   forecastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
   forecastAPIKey = '8Meeqclwe4jseviBEgDp4xrYHMiwUeAB';
