@@ -81,17 +81,17 @@ export class UserInformationService implements CanActivate {
     });
   }
 
-  getCurrentUserCityList() {
+  getCurrentUserCityList(userID) {
     return new Promise<any>((resolve, reject) =>
     {
       const interestedCities: FirebaseUserCitiesModel[] = [];
       const db = firebase.database();
-      db.ref('/users/' + firebase.auth().currentUser.uid + '/cities').once('value').then((snapshot) => {
+      db.ref('/users/' + userID + '/cities').once('value').then((snapshot) => {
         snapshot.forEach((childSnapshot) => {
           interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
+          resolve(interestedCities);
         });
       });
-      resolve(interestedCities);
     });
   }
 

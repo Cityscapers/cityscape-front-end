@@ -17,31 +17,27 @@ export class CitySearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.retrieveInterestedCities();
   }
 
   searchForCity(event: any) {
     const term = event.target.value;
     this.searchService.searchForCity(term)
       .subscribe( results => {
-        const interestedCities = this.retrieveInterestedCities();
         this.results = results;
-        // for ( const obj in interestedCities) {
-        //   if (this.results.indexOf(interestedCities[obj]) === -1) {
-        //     this.results = this.results.filter(interestedCities[obj]);
-        //   }
-        // }
       });
   }
   addCity(city: any) {
-    console.log(city);
-    const userID = firebase.auth().currentUser.uid;
-    this.userService.addCityToUserInDatabase(city, userID);
-  }
-
-  retrieveInterestedCities(): any {
-    this.userService.getCurrentUserCityList().then((res) => {
-        return res;
+    const userID  = firebase.auth().currentUser.uid;
+    this.userService.getCurrentUserCityList(userID).then((res) => {
+      for (let i = 0; i < res.length; i++) {
+        if (city.city === res[i].city && city.state === res[i].state) {
+          // caroline design a cool error message here :)
+          alert('Duplicate City!');
+          return;
+        }
+      }
+      this.userService.addCityToUserInDatabase(city, userID);
     });
   }
+
 }
