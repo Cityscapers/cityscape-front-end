@@ -7,7 +7,7 @@
 		    	<a class="result" href="cities/{{ result.city }}" target="_blank">
 		      	{{ result.city }}, {{ result.state}}
 		    	</a>
-		  		<span class="plus"><img src="assets/plus.svg"></span>
+		  		<span (click)="addCity(result)" class="plus" style="cursor: pointer"><img src="assets/plus.svg"></span>
 	  		</span>
 		  </p>
 		  </span>

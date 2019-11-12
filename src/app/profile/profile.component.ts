@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FirebaseUserModel} from '../shared/models/user.model';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
+import {FirebaseUserCitiesModel} from '../shared/models/user-cities.model';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   user: FirebaseUserModel;
   userID: any;
-  profileForm: FormGroup;
+  interestedCities: FirebaseUserCitiesModel[];
 
   constructor(
     public userService: UserInformationService,
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
+    this.interestedCities = [];
     this.setUserInfo();
   }
 
@@ -33,7 +35,12 @@ export class ProfileComponent implements OnInit {
       this.userID = firebase.auth().currentUser.uid;
       const db = firebase.database();
       db.ref('/users/' + this.userID).once('value').then((snapshot) => {
-        this.user = snapshot.val();
+        this.user = snapshot.val(); // get the current user
+      });
+      db.ref('/users/' + this.userID + '/cities').once('value').then((snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+          this.interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
+        });
       });
     } else {
       this.user = null;

@@ -5,10 +5,14 @@
   </div>
 </nav>
 <h1 class="header">{{user.username}}'s User Page. Their email: {{user.email}}</h1>
-
-</div>
-<div *ngIf="!isUserLoggedIn">
-  <h1>
-    No User Logged in!
-  </h1>
+  <ul>
+  <li *ngFor=" let obj of interestedCities; let i = index">
+      {{i + 1}}. {{obj.city}}, {{obj.state}}
+  </li>
+    </ul>
+  <div *ngIf="!isUserLoggedIn">
+    <h1>
+      No User Logged in!
+    </h1>
+  </div>
 </div>
