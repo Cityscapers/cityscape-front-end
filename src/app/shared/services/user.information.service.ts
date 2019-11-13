@@ -86,25 +86,19 @@ export class UserInformationService implements CanActivate {
     {
       const interestedCities: FirebaseUserCitiesModel[] = [];
       const db = firebase.database();
-      db.ref('/users/' + userID + '/cities').once('value').then((snapshot) => {
-        snapshot.forEach((childSnapshot) => {
-          interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
-          resolve(interestedCities);
-        });
+      db.ref('/users/' + userID).once ('value').then((snapshot) => {
+        if (snapshot.hasChild('/cities')) {
+          db.ref('/users/' + userID + '/cities').once('value').then((snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
+              resolve(interestedCities); // send array back to component that called this method
+            });
+          });
+        } else { // case where user has never added a city
+          resolve([]);
+        }
       });
-    });
-  }
 
-
-  updateCurrentUser(value){
-    return new Promise<any>((resolve, reject) => {
-      let user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: value.name,
-        photoURL: user.photoURL
-      }).then(res => {
-        resolve(res);
-      }, err => reject(err))
     });
   }
 
@@ -121,6 +115,26 @@ export class UserInformationService implements CanActivate {
     db.ref('users/' + userID + '/cities').push({
       city: cityInfo.city,
       state: cityInfo.state
+    });
+   }
+
+   removeCityFromUserInDatabase(cityInfo: any, userID: string) {
+    return new Promise<any>((resolve, reject) => {
+      let keyToDelete: any;
+      const citiesRef = firebase.database().ref('users/' + userID + '/cities');
+      citiesRef.once('value').then( (snapshot) => {
+        snapshot.forEach((childSnapshot) => { // for each city object in user's city list database, compare it to the cityInfo parameter
+          if (childSnapshot.val().city  === cityInfo.city && childSnapshot.val().state === cityInfo.state) {
+            keyToDelete = childSnapshot.key; // pull key of city object to delete if find match
+          }
+          citiesRef.child('/' + keyToDelete).remove().then( () => { // delete the key which contains the city info
+            resolve(cityInfo); // send back the city that was deleted
+          })
+            .catch((error) => {
+              reject(error); // send an error if failure to delete
+            });
+        });
+      });
     });
    }
 }

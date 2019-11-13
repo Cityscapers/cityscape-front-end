@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserInformationService} from '../shared/services/user.information.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public userService: UserInformationService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location,
+    private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
@@ -47,12 +48,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  save(value) {
-    this.userService.updateCurrentUser(value)
-      .then(res => {
-        console.log(res);
-      }, err => console.log(err));
+  removeCity(city) {
+    this.userService.removeCityFromUserInDatabase(city, this.userID).then(
+      (res) => {
+      console.log('SUCCESSFUL REMOVAL OF ' + res.city + ', ' + res.state);
+      this.changeDetector.detectChanges(); // TODO: Page refresh, changeDetector doesn't seem to work
+    },
+      (reject) => {
+      console.log('ERROR WITH REMOVAL: ' + reject);
+      });
   }
+
 
   logout() {
     this.userService.doLogout()

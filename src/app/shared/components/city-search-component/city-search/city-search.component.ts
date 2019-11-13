@@ -37,6 +37,7 @@ export class CitySearchComponent implements OnInit {
         }
       }
       this.userService.addCityToUserInDatabase(city, userID);
+      console.log('CITY ADDED: ' + city.city + ', ' + city.state);
     });
   }
 
