@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CitySearchService} from '../../../services/city-search.service';
 import * as firebase from 'firebase';
 import {UserInformationService} from '../../../services/user.information.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-city-search',
@@ -13,7 +14,8 @@ export class CitySearchComponent implements OnInit {
   results: any[]; // results is an array of objects with 2 members, city & state
 
   constructor( private searchService: CitySearchService,
-               private userService: UserInformationService) {
+               private userService: UserInformationService,
+               private toastService: ToastrService) {
   }
 
   ngOnInit() {
@@ -31,13 +33,12 @@ export class CitySearchComponent implements OnInit {
     this.userService.getCurrentUserCityList(userID).then((res) => {
       for (let i = 0; i < res.length; i++) {
         if (city.city === res[i].city && city.state === res[i].state) {
-          // caroline design a cool error message here :)
-          alert('Duplicate City!');
+          this.toastService.error(city.city + ', ' + city.state + ' is already in your dashboard!', 'Error adding city!');
           return;
         }
       }
       this.userService.addCityToUserInDatabase(city, userID);
-      console.log('CITY ADDED: ' + city.city + ', ' + city.state);
+      this.toastService.success('Added ' + city.city + ', ' + city.state + ' to your dashboard!', 'Success!');
     });
   }
 
