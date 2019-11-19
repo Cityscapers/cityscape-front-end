@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserInformationService} from '../shared/services/user.information.service';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import {FirebaseUserModel} from '../shared/models/user.model';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
@@ -23,7 +23,8 @@ export class ProfileComponent implements OnInit {
     public userService: UserInformationService,
     private route: ActivatedRoute,
     private location: Location,
-    private changeDetector: ChangeDetectorRef) { }
+    private changeDetector: ChangeDetectorRef,
+    public toastService: ToastrService ) { }
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
@@ -75,11 +76,12 @@ export class ProfileComponent implements OnInit {
     this.userService.removeCityFromUserInDatabase(city, this.userID).then(
       (res) => {
       console.log('SUCCESSFUL REMOVAL OF ' + res.city + ', ' + res.state);
+      this.toastService.success('Removed ' + res.city + ', ' + res.state + ' from your dashboard!', 'Success!')
       this.interestedCities = [];
       this.setUserInfo();
     },
       (reject) => {
-      console.log('ERROR WITH REMOVAL: ' + reject);
+        this.toastService.error(reject.toString() , 'Error');
       });
   }
 
@@ -88,6 +90,7 @@ export class ProfileComponent implements OnInit {
     this.userService.doLogout()
       .then((res) => {
         this.location.back();
+        this.toastService.success('Successfully logged out', 'Success');
       }, (error) => {
         console.log('Logout error', error);
       });
