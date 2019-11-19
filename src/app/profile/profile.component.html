@@ -19,11 +19,14 @@
 <div class="card">
   <div class="card-body">
     <h2>Your Saved Cities</h2>
-  <ul class="list-group list-group-flush">
-  <li class="list-group-item" *ngFor=" let obj of interestedCities;">
-      <p>{{obj.city}}, {{obj.state}}</p> <span (click)="removeCity(obj)" class="minus" style="cursor:pointer;"><img src="assets/minus.svg"></span>
-  </li>
-    </ul>
+  <div class="list-group list-group-flush">
+  <span class="list-group-item row" *ngFor=" let obj of interestedCities;">
+      <span class="col-6">{{obj.city}}, {{obj.state}}</span>
+      <span (click)="removeCity(obj)" class="minus col-6" style="cursor:pointer;">
+        <img src="assets/minus.svg">
+      </span>
+  </span>
+    </div>
   </div>
 </div>
 </div>
