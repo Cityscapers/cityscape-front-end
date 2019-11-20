@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CitySearchService} from '../../../services/city-search.service';
-import * as firebase from 'firebase';
-import {UserInformationService} from '../../../services/user.information.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-city-search',
@@ -12,8 +11,8 @@ export class CitySearchComponent implements OnInit {
 
   results: any[]; // results is an array of objects with 2 members, city & state
 
-  constructor( private searchService: CitySearchService,
-               private userService: UserInformationService) {
+
+  constructor( private searchService: CitySearchService) {
   }
 
   ngOnInit() {
@@ -26,19 +25,9 @@ export class CitySearchComponent implements OnInit {
         this.results = results;
       });
   }
-  addCity(city: any) {
-    const userID  = firebase.auth().currentUser.uid;
-    this.userService.getCurrentUserCityList(userID).then((res) => {
-      for (let i = 0; i < res.length; i++) {
-        if (city.city === res[i].city && city.state === res[i].state) {
-          // caroline design a cool error message here :)
-          alert('Duplicate City!');
-          return;
-        }
-      }
-      this.userService.addCityToUserInDatabase(city, userID);
-      console.log('CITY ADDED: ' + city.city + ', ' + city.state);
-    });
-  }
+
+
+
+
 
 }
