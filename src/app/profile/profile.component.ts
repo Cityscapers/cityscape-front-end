@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
   }
   calculateFavoriteState(cities) {
     if ( cities.length === 0) {
-      return 'No favorite city!';
+      return 'No favorite state!';
     }
     let counts: any = {};
     let compare = 0;
