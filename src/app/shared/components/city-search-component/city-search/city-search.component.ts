@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CitySearchService} from '../../../services/city-search.service';
+import {Subject} from 'rxjs';
 import * as firebase from 'firebase';
 import {UserInformationService} from '../../../services/user.information.service';
 import { ToastrService } from 'ngx-toastr';
@@ -28,6 +29,7 @@ export class CitySearchComponent implements OnInit {
         this.results = results;
       });
   }
+
   addCity(city: any) {
     const userID  = firebase.auth().currentUser.uid;
     this.userService.getCurrentUserCityList(userID).then((res) => {
