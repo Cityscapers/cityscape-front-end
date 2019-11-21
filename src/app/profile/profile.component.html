@@ -21,7 +21,9 @@
     <h2>Your Saved Cities</h2>
   <div class="list-group list-group-flush">
   <span class="list-group-item row" *ngFor=" let obj of interestedCities;">
-      <span class="col-6">{{obj.city}}, {{obj.state}}</span>
+    		    	<a class="result" [routerLink]="['/cities', obj.city, obj.state ]" target="_blank">
+		      	{{ obj.city }}, {{ obj.state}}
+		    	</a>
       <span (click)="removeCity(obj)" class="minus col-6" style="cursor:pointer;">
         <img src="assets/minus.svg">
       </span>
