@@ -16,9 +16,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import {ReactiveFormsModule} from '@angular/forms';
-//import {CardModule} from 'primeng/card';
 import { CitySearchComponent } from './shared/components/city-search-component/city-search/city-search.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -33,16 +33,15 @@ import { CitySearchComponent } from './shared/components/city-search-component/c
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFirestoreModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
-    // imports firebase/auth, only needed for auth features
-    //sCardModule
-
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

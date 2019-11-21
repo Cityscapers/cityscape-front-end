@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserInformationService} from '../shared/services/user.information.service';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import {FirebaseUserModel} from '../shared/models/user.model';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
@@ -17,12 +17,14 @@ export class ProfileComponent implements OnInit {
   user: FirebaseUserModel;
   userID: any;
   interestedCities: FirebaseUserCitiesModel[];
+  favoriteState: string;
 
   constructor(
     public userService: UserInformationService,
     private route: ActivatedRoute,
     private location: Location,
-    private changeDetector: ChangeDetectorRef) { }
+    private changeDetector: ChangeDetectorRef,
+    public toastService: ToastrService ) { }
 
   ngOnInit() {
     this.user = new FirebaseUserModel();
@@ -42,20 +44,44 @@ export class ProfileComponent implements OnInit {
         snapshot.forEach((childSnapshot) => {
           this.interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
         });
+        this.favoriteState = this.calculateFavoriteState(this.interestedCities);
       });
     } else {
       this.user = null;
     }
   }
-
+  calculateFavoriteState(cities) {
+    if ( cities.length === 0) {
+      return 'No favorite city!';
+    }
+    let counts: any = {};
+    let compare = 0;
+    let mostFrequent: string = '';
+    for (let i = 0; i < cities.length; i++) {
+      let word = cities[i].state;
+      if (counts[word] === undefined) {
+        counts[word] = 1;
+      }
+      else {
+        counts[word] = counts[word] + 1;
+      }
+      if (counts[word] > compare) {
+        compare = counts[word];
+        mostFrequent = word;
+      }
+    }
+    return 'Your favorite state is ' + mostFrequent + '!';
+  }
   removeCity(city) {
     this.userService.removeCityFromUserInDatabase(city, this.userID).then(
       (res) => {
       console.log('SUCCESSFUL REMOVAL OF ' + res.city + ', ' + res.state);
-      this.changeDetector.detectChanges(); // TODO: Page refresh, changeDetector doesn't seem to work
+      this.toastService.success('Removed ' + res.city + ', ' + res.state + ' from your dashboard!', 'Success!')
+      this.interestedCities = [];
+      this.setUserInfo();
     },
       (reject) => {
-      console.log('ERROR WITH REMOVAL: ' + reject);
+        this.toastService.error(reject.toString() , 'Error');
       });
   }
 
@@ -64,6 +90,7 @@ export class ProfileComponent implements OnInit {
     this.userService.doLogout()
       .then((res) => {
         this.location.back();
+        this.toastService.success('Successfully logged out', 'Success');
       }, (error) => {
         console.log('Logout error', error);
       });
