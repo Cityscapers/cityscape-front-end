@@ -4,7 +4,7 @@
 		<span *ngIf="results">
 		  <p *ngFor="let result of results | slice:0:9">
 		  	<span class=" item">
-		    	<a class="result" href="cities/{{ result.city }}" target="_blank">
+		    	<a class="result" [routerLink]="['/cities', result.city, result.state ]" target="_blank">
 		      	{{ result.city }}, {{ result.state}}
 		    	</a>
 		  		<span (click)="addCity(result)" class="plus" style="cursor: pointer"><img src="assets/plus.svg"></span>

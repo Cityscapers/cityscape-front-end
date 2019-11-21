@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'cities/:city/:state', component: CitiesComponent},
   { path: 'cities', component: CitiesComponent}
 ];
 

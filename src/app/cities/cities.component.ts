@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {first, map} from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cities',
@@ -12,26 +13,48 @@ import { DatePipe } from '@angular/common';
 export class CitiesComponent implements OnInit {
 
   forecast: any;
+  locations: any;
   forecastMin: number[] = [];
   forecastMax: number[] = [];
   description: number[] = [];
   icon: string[] = [];
   date: string[] = [];
   forecastURL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
+  locationKeyURL = 'http://dataservice.accuweather.com/locations/v1/cities/search?apikey=';
   forecastAPIKey = '8Meeqclwe4jseviBEgDp4xrYHMiwUeAB';
   cityName: string;
   degrees = '°F';
   locationKey: string;
+  state: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.getForecast();
+    //this.getForecast();
+    this.route.paramMap.subscribe(params => {
+    this.state = params.get('state');
+    this.cityName = params.get('city');
+  });
+    this.getLocationKey();
   }
 
-   getForecast() {
-      this.locationKey = '326857';
-      this.httpClient.get(this.forecastURL + this.locationKey + '?apikey=' + this.forecastAPIKey)
+   getLocationKey() {
+    this.httpClient.get(this.locationKeyURL + this.forecastAPIKey + '&q=' + this.cityName)
+      .subscribe((locations: any) => {
+        this.locations = locations;
+        for ( let i = 0; i < this.locations.length; i++) {
+          console.log(this.locations[i].AdministrativeArea.EnglishName);
+          console.log(this.state);
+          if (this.locations[i].AdministrativeArea.EnglishName === this.state) {
+            this.locationKey = this.locations[i].Key;
+            this.getForecast(this.locationKey);
+          }
+        }
+      });
+   }
+
+   getForecast(locationKey: string) {
+      this.httpClient.get(this.forecastURL + locationKey + '?apikey=' + this.forecastAPIKey)
       .subscribe((forecast: any) => {
         this.forecast = forecast;
         for ( let i = 0; i < 5; i++) {
