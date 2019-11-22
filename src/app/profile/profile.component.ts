@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   userID: any;
   interestedCities: FirebaseUserCitiesModel[];
   favoriteState: string;
+  loading = false;
 
   constructor(
     public userService: UserInformationService,
@@ -34,6 +35,7 @@ export class ProfileComponent implements OnInit {
 
 
   setUserInfo() {
+    this.loading = true;
     if (this.isUserLoggedIn) {
       this.userID = firebase.auth().currentUser.uid;
       const db = firebase.database();
@@ -45,9 +47,11 @@ export class ProfileComponent implements OnInit {
           this.interestedCities.push(childSnapshot.val()); // push each city object to an array of interested cities
         });
         this.favoriteState = this.calculateFavoriteState(this.interestedCities);
+        this.loading = false;
       });
     } else {
       this.user = null;
+      this.loading = false;
     }
   }
   calculateFavoriteState(cities) {

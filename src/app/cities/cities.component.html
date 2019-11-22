@@ -30,7 +30,7 @@
                 <h2>{{date[2]|date:'EEEE'}}</h2>
                 <p style="text-align:center"><img src={{icon[2]}}/></p>
                 <h3 style="text-align:center"> {{ forecastMin[2] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[2] | number:'1.0-0' }}{{degrees}}</h3>
-                <p style="text-align:center"> {{ description[2] }} </p> 
+                <p style="text-align:center"> {{ description[2] }} </p>
             </div>
         </div>
         <div class="column">
@@ -46,10 +46,11 @@
                 <h2>{{date[4]|date:'EEEE'}}</h2>
                 <p style="text-align:center"><img src={{icon[4]}}/></p>
                 <h3 style="text-align:center"> {{ forecastMin[4] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[4] | number:'1.0-0' }}{{degrees}}</h3>
-                <p style="text-align:center"> {{ description[4] }} </p>   
+                <p style="text-align:center"> {{ description[4] }} </p>
         </div>
         </div>
     </div>
-</div>
+      <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+    </div>
 
 
