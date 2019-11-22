@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string;
   successMessage: string;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,21 +30,25 @@ export class SignupComponent implements OnInit {
 
   createForm() {
     this.registerForm = this.fb.group({
-      email: ['', Validators.required ],
+      email: ['', Validators.required],
       password: ['', Validators.required],
       username: ['', Validators.required]
     });
   }
 
   tryRegister(value) {
+    this.loading = true;
     this.authService.doRegister(value)
       .then(res => {
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';
+        this.loading = false;
+        this.authService.doLogout().then(r => {});
       }, err => {
         console.log(err);
         this.errorMessage = err.message;
         this.successMessage = '';
+        this.loading = false;
       });
   }
 

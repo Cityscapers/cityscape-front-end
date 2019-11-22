@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CitiesComponent implements OnInit {
 
+  loading = false;
   forecast: any;
   locations: any;
   forecastMin: number[] = [];
@@ -54,7 +55,8 @@ export class CitiesComponent implements OnInit {
    }
 
    getForecast(locationKey: string) {
-      this.httpClient.get(this.forecastURL + locationKey + '?apikey=' + this.forecastAPIKey)
+     this.loading = true;
+     this.httpClient.get(this.forecastURL + locationKey + '?apikey=' + this.forecastAPIKey)
       .subscribe((forecast: any) => {
         this.forecast = forecast;
         for ( let i = 0; i < 5; i++) {
@@ -68,6 +70,8 @@ export class CitiesComponent implements OnInit {
           }
           this.date.push(this.forecast.DailyForecasts[i].Date);
         }
-    });
+        this.loading = false;
+
+      });
    }
 }
