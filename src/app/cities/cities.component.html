@@ -4,47 +4,50 @@
     <img class="image col-6" style="margin-left: 25%" src="../assets/map.png" />
     <app-city-search class="search"></app-city-search>
 </div>
-<div *ngIf="this.router.url != '/cities'">
-    <h1 style="text-align: center">{{cityName}}, {{ state}}</h1>
-    <div class="row">
-        <div class="column">
-            <div class="card">
-                <p>"Today's Weather"</p>
+<div class="city-page" *ngIf="this.router.url != '/cities'">
+    <div class="card">
+        <div class="card-body row">
+            <h1 class="col-6">{{cityName}}, {{ state}}</h1>
+            <div class="col-6">
                 <p style="text-align:center"><img src={{icon[0]}}/></p>
-                <p style="text-align:center"> {{ forecastMin[0] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[0] | number:'1.0-0' }}{{degrees}}</p>
+                <h2 style="text-align:center"> {{ forecastMin[0] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[0] | number:'1.0-0' }}{{degrees}}</h2>
                 <p style="text-align:center"> {{ description[0] }} </p>
             </div>
         </div>
+    </div>
+    <div class="card">
+        <div class="card-body row">
         <div class="column">
-            <div class="card">
-                <p>{{date[1]|date:short}}</p>
+            <div>
+                <h2>{{date[1]|date:'EEEE'}}</h2>
                 <p style="text-align:center"><img src={{icon[1]}}/></p>
-                <p style="text-align:center"> {{ forecastMin[1] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[1] | number:'1.0-0' }}{{degrees}}</p>
+                <h3 style="text-align:center"> {{ forecastMin[1] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[1] | number:'1.0-0' }}{{degrees}}</h3>
                 <p style="text-align:center"> {{ description[1] }} </p>
             </div>
         </div>
         <div class="column">
-            <div class="card">
-                <p>{{date[2]|date:short}}</p>
+            <div>
+                <h2>{{date[2]|date:'EEEE'}}</h2>
                 <p style="text-align:center"><img src={{icon[2]}}/></p>
-                <p style="text-align:center"> {{ forecastMin[2] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[2] | number:'1.0-0' }}{{degrees}}</p>
+                <h3 style="text-align:center"> {{ forecastMin[2] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[2] | number:'1.0-0' }}{{degrees}}</h3>
                 <p style="text-align:center"> {{ description[2] }} </p> 
             </div>
         </div>
         <div class="column">
-            <div class="card">
-                <p>{{date[3]|date:short}}</p>
+            <div>
+                <h2>{{date[3]|date:'EEEE'}}</h2>
                 <p style="text-align:center"><img src={{icon[3]}}/></p>
-                <p style="text-align:center"> {{ forecastMin[3] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[3] | number:'1.0-0' }}{{degrees}}</p>
+                <h3 style="text-align:center"> {{ forecastMin[3] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[3] | number:'1.0-0' }}{{degrees}}</h3>
                 <p style="text-align:center"> {{ description[3] }} </p>
             </div>
         </div>
-        <div class="column"  style="margin-left: 25%">
-            <div class="card">
-            <p>{{date[4]|date:short}}</p>
+        <div class="column">
+            <div>
+                <h2>{{date[4]|date:'EEEE'}}</h2>
                 <p style="text-align:center"><img src={{icon[4]}}/></p>
-                <p style="text-align:center"> {{ forecastMin[4] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[4] | number:'1.0-0' }}{{degrees}}</p>
+                <h3 style="text-align:center"> {{ forecastMin[4] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[4] | number:'1.0-0' }}{{degrees}}</h3>
                 <p style="text-align:center"> {{ description[4] }} </p>   
+        </div>
         </div>
     </div>
 </div>
