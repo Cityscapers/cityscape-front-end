@@ -1,5 +1,5 @@
 <html class="container searchbox">
-	<span class="search">
+	<span class="search" [ngStyle]="customStyle">
 		<input class="box" (keyup)="searchForCity($event)" placeholder="search for a city">
 		<span *ngIf="results">
 		  <p *ngFor="let result of results | slice:0:9">

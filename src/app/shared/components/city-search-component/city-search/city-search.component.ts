@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {CitySearchService} from '../../../services/city-search.service';
 import {Subject} from 'rxjs';
 import * as firebase from 'firebase';
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CitySearchComponent implements OnInit {
 
+  @Input() customStyle: {};
   results: any[]; // results is an array of objects with 2 members, city & state
 
   constructor( private searchService: CitySearchService,

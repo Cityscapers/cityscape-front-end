@@ -24,13 +24,28 @@
 
 .image {
     display: inline-block;
-    margin-top: -10%;
+    height: 500px;
+    margin-top: -5%;
 }
 
 .city-page {
     margin-top: 30px;
     margin-right: 20px;
     margin-left: 20px;
+}
+
+.state {
+	height: 150px;
+}
+
+.today {
+    margin-top: 8px;
+}
+
+.search {
+    border-color: lightskyblue;
+    color: lightskyblue;
+
 }
 
 
