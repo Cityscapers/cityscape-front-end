@@ -27,6 +27,7 @@ export class CitiesComponent implements OnInit {
   degrees = '°F';
   locationKey: string;
   state: string;
+  invalidCity = false;
 
   constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) {}
 
@@ -49,8 +50,10 @@ export class CitiesComponent implements OnInit {
           if (this.locations[i].AdministrativeArea.EnglishName === this.state) {
             this.locationKey = this.locations[i].Key;
             this.getForecast(this.locationKey);
+            return;
           }
         }
+        this.invalidCity = true;
       });
    }
 
