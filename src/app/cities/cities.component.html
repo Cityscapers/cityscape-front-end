@@ -2,7 +2,7 @@
 <div *ngIf="this.router.url === '/cities'">
     <h1 style="text-align: center">Weather Is Out There!</h1>
     <img class="image col-6" style="margin-left: 25%" src="../assets/photos/weather.svg" />
-    <app-city-search [customStyle]="search"></app-city-search>
+    <app-city-search></app-city-search>
 </div>
 <div class="city-page" *ngIf="this.router.url != '/cities'">
     <div class="card">
