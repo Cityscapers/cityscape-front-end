@@ -53,4 +53,4 @@
       <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
     </div>
 </div>
-<h1 *ngIf="invalidCity"> 404, City Not found </h1>
+<h1 *ngIf="invalidCity && this.router.url != '/cities'"> 404, City Not found </h1>
