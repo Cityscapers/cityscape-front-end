@@ -1,15 +1,19 @@
 
 <div *ngIf="this.router.url === '/cities'">
     <h1 style="text-align: center">Weather Is Out There!</h1>
-    <img class="image col-6" style="margin-left: 25%" src="../assets/map.png" />
-    <app-city-search class="search"></app-city-search>
+    <img class="image col-6" style="margin-left: 25%" src="../assets/photos/weather.svg" />
+    <app-city-search></app-city-search>
 </div>
 <div class="city-page" *ngIf="this.router.url != '/cities' && !invalidCity">
     <div class="card">
         <div class="card-body row">
-            <h1 class="col-6">{{cityName}}, {{ state}}</h1>
             <div class="col-6">
-                <p style="text-align:center"><img src={{icon[0]}}/></p>
+                <h1>{{cityName}}, {{ state}}</h1>
+                <img class="state" src="../assets/states/{{state.toLowerCase()}}.png">
+            </div>
+            <div class="col-6">
+                <h2 class="today">Today's Weather</h2>
+                <p class="weatherImg" ><img src={{icon[0]}}/></p>
                 <h2 style="text-align:center"> {{ forecastMin[0] | number:'1.0-0' }}{{degrees}} - {{ forecastMax[0] | number:'1.0-0' }}{{degrees}}</h2>
                 <p style="text-align:center"> {{ description[0] }} </p>
             </div>
