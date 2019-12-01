@@ -9,7 +9,8 @@
     <p class="card-text">{{user.email}}</p>
   </div>
   <div class="col-4">
-    <p>{{interestedCities.length}} saved cities.</p>
+    <p *ngIf="interestedCities.length != 1">{{interestedCities.length}} saved cities.</p>
+    <p *ngIf="interestedCities.length === 1">{{interestedCities.length}} saved city.</p>
     <p> {{favoriteState}}</p>
     <a (click)="logout()" style="color:white;" class="btn btn-dark btn-sm">logout</a>
   </div>

@@ -30,13 +30,14 @@ export class SignupComponent implements OnInit {
 
   createForm() {
     this.registerForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      username: ['', Validators.required]
+      email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(15)]],
+      username: ['', [Validators.required, Validators.maxLength(10)]]
     });
   }
 
   tryRegister(value) {
+    console.log(this.registerForm.controls.email.hasError('maxlength'));
     this.loading = true;
     this.authService.doRegister(value)
       .then(res => {
@@ -59,6 +60,5 @@ export class SignupComponent implements OnInit {
         }, err => console.log(err)
       );
   }
-
 
 }

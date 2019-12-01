@@ -4,7 +4,7 @@
     <img class="image col-6" style="margin-left: 25%" src="../assets/map.png" />
     <app-city-search class="search"></app-city-search>
 </div>
-<div class="city-page" *ngIf="this.router.url != '/cities'">
+<div class="city-page" *ngIf="this.router.url != '/cities' && !invalidCity">
     <div class="card">
         <div class="card-body row">
             <h1 class="col-6">{{cityName}}, {{ state}}</h1>
@@ -52,5 +52,5 @@
     </div>
       <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
     </div>
-
-
+</div>
+<h1 *ngIf="invalidCity"> 404, City Not found </h1>
