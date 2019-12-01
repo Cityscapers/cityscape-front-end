@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import * as firebase from 'firebase';
 
 @Component({
@@ -8,7 +7,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit() {
   }

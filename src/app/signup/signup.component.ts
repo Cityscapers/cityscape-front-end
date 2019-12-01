@@ -18,8 +18,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: UserInformationService,
-    private router: Router
+    public authService: UserInformationService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit {
   }
 
   tryRegister(value) {
-    console.log(this.registerForm.controls.email.hasError('maxlength'));
     this.loading = true;
     this.authService.doRegister(value)
       .then(res => {
