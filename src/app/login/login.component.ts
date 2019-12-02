@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: UserInformationService,
-    private router: Router,
+    public router: Router,
     private fb: FormBuilder
   ) { }
 
