@@ -20,7 +20,8 @@ import { CitySearchComponent } from './shared/components/city-search-component/c
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxLoadingModule} from 'ngx-loading';
-
+import { CitySearchService } from './shared/services/city-search.service';
+import { UserInformationService } from './shared/services/user.information.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,10 @@ import {NgxLoadingModule} from 'ngx-loading';
     ToastrModule.forRoot(),
     NgxLoadingModule.forRoot({})
   ],
-  providers: [],
+  providers: [
+    CitySearchService,
+    UserInformationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
