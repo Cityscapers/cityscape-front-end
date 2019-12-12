@@ -8,7 +8,7 @@ import {FirebaseUserCitiesModel} from '../models/user-cities.model';
 @Injectable({
   providedIn: 'root'
 })
-export class UserInformationService implements CanActivate {
+export class UserInformationService  {
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -54,18 +54,6 @@ export class UserInformationService implements CanActivate {
       } else {
         reject();
       }
-    });
-  }
-
-  canActivate(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.getCurrentUser()
-        .then(user => {
-          this.router.navigate(['/user']);
-          return resolve(false);
-        }, err => {
-          return resolve(true);
-        });
     });
   }
 

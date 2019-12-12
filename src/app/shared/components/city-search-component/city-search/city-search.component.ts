@@ -15,9 +15,9 @@ export class CitySearchComponent implements OnInit {
   @Input() customStyle: {};
   results: any[]; // results is an array of objects with 2 members, city & state
 
-  constructor( private searchService: CitySearchService,
-               private userService: UserInformationService,
-               private toastService: ToastrService) {
+  constructor( public searchService: CitySearchService,
+               public userService: UserInformationService,
+               public toastService: ToastrService) {
   }
 
   ngOnInit() {
